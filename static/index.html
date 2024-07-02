@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golang App Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 5px;
+        }
+        #responses {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Golang App Interface</h1>
+
+    <h2>HTTP REST Request</h2>
+    <input type="text" id="restInput" placeholder="Enter REST endpoint">
+    <button onclick="sendRestRequest()">Send REST Request</button>
+
+    <h2>WebSocket Connection</h2>
+    <input type="text" id="wsInput" placeholder="Enter WebSocket endpoint">
+    <button onclick="connectWebSocket()">Connect WebSocket</button>
+
+    <div id="responses">
+        <h3>Responses:</h3>
+        <div id="restResponse"></div>
+        <div id="wsResponse"></div>
+    </div>
+
+    <script>
+    function sendRestRequest() {
+        const endpoint = document.getElementById('restInput').value;
+        fetch(endpoint)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('restResponse').innerHTML = `<p>REST Response: ${data}</p>`;
+            })
+            .catch(error => {
+                document.getElementById('restResponse').innerHTML = `<p>REST Error: ${error.toString()}</p>`;
+                console.error('REST Error:', error);
+            });
+    }
+
+  let ws;
+
+    function connectWebSocket() {
+        const endpoint = document.getElementById('wsInput').value;
+        ws = new WebSocket(endpoint);
+
+        ws.onopen = function(event) {
+            document.getElementById('wsResponse').innerHTML += '<p>WebSocket Connected</p>';
+        };
+
+        ws.onmessage = function(event) {
+            document.getElementById('wsResponse').innerHTML += `<p>WebSocket Message: ${event.data}</p>`;
+        };
+
+        ws.onerror = function(event) {
+            document.getElementById('wsResponse').innerHTML += `<p>WebSocket Error: ${event.type}. Check console for more details.</p>`;
+            console.error('WebSocket Error:', event);
+        };
+
+        ws.onclose = function(event) {
+            document.getElementById('wsResponse').innerHTML += `<p>WebSocket Disconnected (Code: ${event.code}, Reason: ${event.reason || 'No reason provided'})</p>`;
+            console.log('WebSocket Close Event:', event);
+        };
+    }
+</script>
+
+</body>
+</html>

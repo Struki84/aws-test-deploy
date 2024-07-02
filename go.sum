@@ -1,0 +1,4 @@
+github.com/GoLangWebSDK/crud v0.0.0-20231221021800-f382b7b837ff h1:seOeJiu4rA2N29eHTgJmCiBOT3MchOcnWmdY+M8X3Ik=
+github.com/GoLangWebSDK/crud v0.0.0-20231221021800-f382b7b837ff/go.mod h1:nicnNwEJPgzzXwEyZBBXx+wanvgdSCg97c3UU4z/Q6U=
+github.com/GoLangWebSDK/rest v0.1.0 h1:pNfj1gHdvhc2VonAnwqoL0N3XcmX/muvJDfhCT6Iuic=
+github.com/GoLangWebSDK/rest v0.1.0/go.mod h1:At2iPXBx3LHLPVCbZoNynK9u+kW6ByNVWQ4DNWI1SzE=
