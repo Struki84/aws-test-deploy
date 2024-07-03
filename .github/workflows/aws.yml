@@ -60,6 +60,16 @@ jobs:
         role-to-assume: arn:aws:iam::339712877151:role/GitHubAction-AssumeRoleWithAction
         role-session-name: Github
         aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Debug AWS Credentials
+      run: |
+        echo "AWS_ROLE_ARN: ${{ env.AWS_ROLE_ARN }}"
+        echo "GitHub Actor: ${{ github.actor }}"
+        echo "GitHub Repository: ${{ github.repository }}"
+        echo "GitHub Ref: ${{ github.ref }}"
+        aws sts get-caller-identity || true
+      env:
+        AWS_ROLE_ARN: arn:aws:iam::339712877151:role/GitHubAction-AssumeRoleWithAction
 
     - name: Login to Amazon ECR
       id: login-ecr
